@@ -111,6 +111,7 @@ The following can be customized:
 - `deploy`           : It can be 'true' or 'false'. Using false node2 deploy will be skipped.
 
 - My addition
+
 ![](https://user-images.githubusercontent.com/29458929/89244819-7a032c00-d5d5-11ea-9977-2173f4bdf34e.png)
 
 
