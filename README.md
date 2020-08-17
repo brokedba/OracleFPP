@@ -1,9 +1,13 @@
 # Oracle Fleet Patching and Provisioning (FPP) Vagrant project on VirtualBox or KVM/libVirt provider
 
 ###### Author: Ruggero Citton (<ruggero.citton@oracle.com>) - Orale RAC Pack, Cloud Innovation and Solution Engineering Team
+###### updated by : @brokedba (<https://twitter.com/BrokeDba>) 
 
 This directory contains Vagrant build files to provision automatically
 one Grid Infrastructure and FPP Server host + (optional) an Oracle FPP target, using Vagrant, Oracle Linux 7.4 and shell scripts.
+##### What I changed #####
+- I added few shell scripts and modified the VagrantFile to add disks in the target FPP and deploy a 12c database while provisioning the host.
+- This will allow to import and image from an existing 12c database  as its not possible through zip files like for 18/19 home images. 
 ![](images/OracleFPP.png)
 
 ## Prerequisites
@@ -103,6 +107,10 @@ The following can be customized:
 - `storage_pool_name`: KVM/libVirt storage pool name
 - `u01_disk`:          VirtualBox Oracle binary virtual disk (u01) file path
 - `deploy`           : It can be 'true' or 'false'. Using false node2 deploy will be skipped.
+
+- My addition
+
+
 
 #### shared network
 
