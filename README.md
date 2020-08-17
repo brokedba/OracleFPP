@@ -5,10 +5,12 @@
 
 This directory contains Vagrant build files to provision automatically
 one Grid Infrastructure and FPP Server host + (optional) an Oracle FPP target, using Vagrant, Oracle Linux 7.4 and shell scripts.
+
 ##### What I changed #####
 - I added few shell scripts and modified the VagrantFile to add disks in the target FPP and deploy a 12c database while provisioning the host.
 - This will allow to import and image from an existing 12c database  as its not possible through zip files like for 18/19 home images. 
 ![](images/OracleFPP.png)
+
 
 ## Prerequisites
 
@@ -109,7 +111,7 @@ The following can be customized:
 - `deploy`           : It can be 'true' or 'false'. Using false node2 deploy will be skipped.
 
 - My addition
-
+![](https://user-images.githubusercontent.com/29458929/89244819-7a032c00-d5d5-11ea-9977-2173f4bdf34e.png)
 
 
 #### shared network
