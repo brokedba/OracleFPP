@@ -146,54 +146,67 @@ The following can be customized:
 - `asm_lib_type`     : ASM library in use (ASMLIB/AFD)
 
 #### Virtualbox provider Example1 (Oracle FPP Server available on host-only Virtualbox network):
+```
+host1:
+  vm_name: fpp-Server
+  mem_size: 12288
+  cpus: 1
+  public_ip:     192.168.78.101
+  vip_ip:        192.168.78.201
+  scan_ip1:      192.168.78.151
+  scan_ip2:      192.168.78.152
+  scan_ip3:      192.168.78.153
+  gns_ip:        192.168.78.108
+  ha_vip:        192.168.78.109
+  private_ip:    192.168.100.101
+  u01_disk: ./fpps_u01.vdi
 
-    host1:
-      vm_name: fpps
-      mem_size: 16384
-      cpus: 1
-      private_ip:    192.168.200.101
-      public_ip:     192.168.56.101
-      vip_ip:        192.168.56.102
-      scan_ip1:      192.168.56.105
-      scan_ip2:      192.168.56.106
-      scan_ip3:      192.168.56.107
-      gns_ip:        192.168.56.108
-      ha_vip:        192.168.56.109
-      storage_pool_name: Vagrant_KVM
+host2:
+  vm_name: fpp-Client
+  mem_size: 6144
+  cpus: 1
+  public_ip: 192.168.78.102
+  u01_disk: ./fppc_u01.vdi
+  u02_disk: ./fppc_u02.vdi
+  deploy: 'true'
+  deploy_db: 'true'
+  oracle_base: /u01/app/oracle
+  db_home: /u01/app/oracle/product/12.1.0.2/dbhome_1
+  db_sid: cdb1
+  pdb: pdb1
+  charset: AL32UTF8
+  edition: EE
+  listener_port: 1521
+  
+shared:
+  prefix_name:   london-fleet
+  # ---------------------------------------------
+  network:       hostonly
+  netmask:       
+  gateway:       
+  dns_public_ip: 8.8.8.8
+  domain:        evilcorp.com
+  # ---------------------------------------------
+  non_rotational: 'on'
+  # ---------------------------------------------
+  asm_disk_path: C:\DATA\VM\boxes\FPP\shared
+  asm_disk_num:   6
+  asm_disk_size: 10
+  # ---------------------------------------------
 
-    host2:
-      vm_name: fppc
-      mem_size: 8192
-      cpus: 1
-      public_ip:  192.168.56.201
-      storage_pool_name: Vagrant_KVM
-      deploy: 'true'
-
-    shared:
-      prefix_name: ol7-fpp
-      # ---------------------------------------------
-      network: hostonly
-      domain: localdomain
-      # ---------------------------------------------
-      non_rotational: 'on'
-      asm_disk_num:   8
-      asm_disk_size: 10
-      storage_pool_name: Vagrant_KVM
-      # ---------------------------------------------
-
-    env:
-      provider: virtualbox
-      # ---------------------------------------------
-      gi_software: LINUX.X64_193000_grid_home.zip
-      # ---------------------------------------------
-      root_password:   welcome1
-      grid_password:   welcome1
-      oracle_password: welcome1
-      sys_password:    welcome1
-      # ---------------------------------------------
-      ora_languages:   en,en_GB
-      # ---------------------------------------------
-
+env:
+  provider: virtualbox
+  # ---------------------------------------------
+  gi_software: LINUX.X64_193000_grid_home.zip
+  # ---------------------------------------------
+  root_password:   welcome1
+  grid_password:   welcome1
+  oracle_password: welcome1
+  sys_password:    welcome1
+  # ---------------------------------------------
+  ora_languages:   en,en_US
+  # ---------------------------------------------
+```
 #### Virtualbox provider Example2: (Oracle FPP Server available on public network):
 
     host1:
