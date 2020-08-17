@@ -110,7 +110,7 @@ The following can be customized:
 - `u01_disk`:          VirtualBox Oracle binary virtual disk (u01) file path
 - `deploy`           : It can be 'true' or 'false'. Using false node2 deploy will be skipped.
 
-- My addition (To ship Host2 with a 12c Database, you always have the choice to not deploy it by setting deply to False). 
+- My addition (To ship Host2 with a 12c Database, you always have the choice to not deploy it by setting deploy_db to False). 
 
 ![](https://user-images.githubusercontent.com/29458929/89244819-7a032c00-d5d5-11ea-9977-2173f4bdf34e.png)
 
