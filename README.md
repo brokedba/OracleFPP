@@ -279,7 +279,7 @@ Note4 : following some fpp commands you may want to try
 - `rhpctl import image -image gi_19300 -imagetype ORACLEGISOFTWARE -zip /vagrant/ORCL_software/LINUX.X64_193000_grid_home.zip`
 - `rhpctl add workingcopy -workingcopy wc_db_19300 -image db_19300 -user oracle -groups OSBACKUP=dba,OSDG=dba,OSKM=dba,OSRAC=dba -oraclebase /u01/app/oracle -path /u01/app/oracle/product/193000/dbhome_1 -targetnode fppc -root`
 - `rhpctl add database -workingcopy wc_db_19300 -dbname ORCL -dbtype SINGLE -cdb -pdbName PDB -numberOfPDBs 2 -root`
-- 
+- Import an image from an existing 12c database home
 ```
 [grid@fpp-Server]$ rhpctl import image -image db_12102 -imagetype ORACLEDBSOFTWARE -path /u01/app/oracle/product/12.1.0.2/dbhome_1 -targetnode fpp-Client
  -root
@@ -289,4 +289,38 @@ fpp-Server.evilcorp.com: Creating a new ACFS file system for image "db_12102" ..
 fpp-Server.evilcorp.com: Starting export file system...
 fpp-Server.evilcorp.com: Mounting file system...
 fpp-Server.evilcorp.com: Copying files...
-fpp-Server.evilcorp.com: Removing export file system ...```
+fpp-Server.evilcorp.com: Removing export file system ...
+
+QUERY IMAGE
+ ============  
+  
+  [grid@fpp-Server ~]$ rhpctl query image -image db_12102
+  fpp-Server.evilcorp.com: Audit ID: 17
+  Image name: db_12102
+  Owner: grid@london-fleet-c
+  Site: london-fleet-c
+  Access control: USER:grid@london-fleet-c
+  Access control: ROLE:OTHER
+  Access control: ROLE:GH_IMG_PUBLISH
+  Access control: ROLE:GH_IMG_ADMIN
+  Access control: ROLE:GH_IMG_VISIBILITY
+  Parent Image:
+  Software home path: /rhp_storage/images/idb_12102399207/swhome
+  Image state: PUBLISHED
+  Image size: 5320 Megabytes
+  Image Type: ORACLEDBSOFTWARE
+  Image Version: 12.1.0.2.0
+  Groups configured in the image: OSDBA=dba,OSBACKUP=dba,OSDG=dba,OSKM=dba
+  Image platform: Linux_AMD64
+  Interim patches installed:
+  Contains a non-rolling patch: FALSE
+  Complete: TRUE```
+
+- upgrade from an existing 12 target db_home to a 19c working copy 
+
+```
+
+[grid@fpp-Server ~]$ rhpctl upgrade database -dbname cdb1 -sourcehome /u01/app/oracle/product/12.1.0.2/dbhome_1  -destwc wc_db_19300 -targetnode fpp-Client -root
+     Enter user "root" password:
+
+```
