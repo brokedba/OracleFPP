@@ -15,7 +15,8 @@ one Grid Infrastructure and FPP Server host + (optional) an Oracle FPP target wi
 
 # Important #
 This has build have been adapted to allow for a 12 db to be shipped with the target (optionally) and was tested on VirtualBox but the change do not apply to kvm/Libvirt. 
-please only select virtualbox as hypervisor as otherwise the provisoning will fail.  
+please only select virtualbox as hypervisor as otherwise the provisoning will fail. 
+- I will try to remove any kvm libvirt refences from this README as it's not applicable but it'll depend on my availability. 
 
 
 ![](images/OracleFPP.png)
@@ -135,6 +136,9 @@ The following can be customized:
 
 #### Virtualbox provider Example1 (Oracle FPP Server available on host-only Virtualbox network):
 ```
+# -----------------------------------------------
+# vagrant.yml for VirtualBox
+# -----------------------------------------------
 host1:
   vm_name: fpp-Server
   mem_size: 12288
@@ -195,57 +199,6 @@ env:
   ora_languages:   en,en_US
   # ---------------------------------------------
 ```
-#### Virtualbox provider Example2: (Oracle FPP Server available on public network):
-
-    host1:
-      vm_name: fpps
-      mem_size: 16384
-      cpus: 2
-      public_ip:  10.0.0.101
-      vip_ip:     10.0.0.102
-      scan_ip1:   10.0.0.105
-      scan_ip2:   10.0.0.106
-      scan_ip3:   10.0.0.107
-      gns_ip:     10.0.0.108
-      ha_vip:     10.0.0.109
-      private_ip: 192.168.200.101
-      storage_pool_name: Vagrant_KVM
-
-    host2:
-      vm_name: fppc
-      mem_size: 8192
-      cpus: 1
-      public_ip:  10.0.0.201
-      storage_pool_name: Vagrant_KVM
-      deploy: 'false'
-
-    shared:
-      prefix_name:   vgt-ol7-fpp
-      # ---------------------------------------------
-      network:       public
-      netmask:       255.255.255.0
-      gateway:       10.0.0.1
-      dns_public_ip: 8.8.8.8
-      domain:        mydomain.it
-      # ---------------------------------------------
-      non_rotational: 'on'
-      asm_disk_num: 4
-      asm_disk_size: 200
-      storage_pool_name: Vagrant_KVM
-      # ---------------------------------------------
-
-    env:
-      provider: virtualbox
-      # ---------------------------------------------  
-      gi_software: LINUX.X64_193000_grid_home.zip
-      # ---------------------------------------------
-      root_password:   welcome1
-      grid_password:   welcome1
-      oracle_password: welcome1
-      sys_password:    welcome1
-      # ---------------------------------------------
-      ora_languages:   en,en_GB
-      # ---------------------------------------------
 
 
 
