@@ -1,7 +1,7 @@
-# Oracle Fleet Patching and Provisioning (FPP) Vagrant project on VirtualBox or KVM/libVirt provider
+# Oracle Fleet Patching and Provisioning (FPP) Vagrant project on VirtualBox (brokedba EDIT)
 
 ###### Author: Ruggero Citton (<ruggero.citton@oracle.com>) - Orale RAC Pack, Cloud Innovation and Solution Engineering Team
-###### updated by : @brokedba (<https://twitter.com/BrokeDba>) 
+###### Forked and updated by : @brokedba (<https://twitter.com/BrokeDba>) 
 
 This directory contains Vagrant build files to provision automatically
 one Grid Infrastructure and FPP Server host + (optional) an Oracle FPP target, using Vagrant, Oracle Linux 7.4 and shell scripts.
@@ -10,6 +10,9 @@ one Grid Infrastructure and FPP Server host + (optional) an Oracle FPP target, u
 - I added few shell scripts and modified the VagrantFile to add disks in the target FPP and deploy a 12c database while provisioning the host.
 - This will allow to import and image from an existing 12c database  as its not possible through zip files like for 18/19 home images. 
 
+# Important #
+This has build have been adapted to allow for a 12 db to be shipped with the target (optionally) and was tested on VirtualBox but the change do not apply to kvm/Libvirt. 
+please only select virtualbox as hypervisor as otherwise the provisoning will fail.  
 
 
 ![](images/OracleFPP.png)
@@ -31,27 +34,6 @@ one Grid Infrastructure and FPP Server host + (optional) an Oracle FPP target, u
     - Use `VBoxManage setproperty machinefolder <your path>` to set VM default location
 - Dynamically allocated storage for ASM shared virtual disks (node1, location set by `asm_disk_path`): ~24 Gb
 
-#### Extra Steps when KVM/libVirt provider is in use:
-
-1. Install Vagrant plugin `vagrant-mutate`:
-        vagrant plugin install vagrant-mutate
-2. If not done, add ol7.4 vagrant box for virtualbox:
-        vagrant box add --provider virtualbox https://yum.oracle.com/boxes/oraclelinux/ol74/ol74.box --name ol74
-3. Check for the new  vagrant box availability:
-        vagrant box list
-        ol7-latest    (libvirt, 0)
-        ol7-latest    (virtualbox, 0)
-        ol74          (virtualbox, 0)    <<<---- (!)
-        oraclelinux/7 (libvirt, 7.7.17)
-4. Convert ol7.4 box to libvirt
-        vagrant mutate ol74 libvirt
-5. Check for the new  vagrant box availability:
-        vagrant box list
-        ol7-latest    (libvirt, 0)
-        ol7-latest    (virtualbox, 0)
-        ol74          (libvirt, 0)      <<<---- (!)
-        ol74          (virtualbox, 0)
-        oraclelinux/7 (libvirt, 7.7.17)
 
 ## Memory requirement
 
@@ -262,105 +244,7 @@ env:
       ora_languages:   en,en_GB
       # ---------------------------------------------
 
-#### KVM/libVirt provider Example1 (Oracle FPP Server and FPP target on private network):
 
-    host1:
-      vm_name: fpps
-      mem_size: 16384
-      cpus: 1
-      private_ip:    192.168.200.101
-      public_ip:     192.168.125.101
-      vip_ip:        192.168.125.102
-      scan_ip1:      192.168.125.105
-      scan_ip2:      192.168.125.106
-      scan_ip3:      192.168.125.107
-      gns_ip:        192.168.125.108
-      ha_vip:        192.168.125.109
-      storage_pool_name: Vagrant_KVM_Storage
-
-      host2:
-      vm_name: fppc
-      mem_size: 8192
-      cpus: 1
-      public_ip:  192.168.125.201
-      storage_pool_name: Vagrant_KVM_Storage
-      deploy: 'true'
-
-      shared:
-      prefix_name:   vgt-ol7-fpp
-      # ---------------------------------------------
-      network: hostonly
-      domain: localdomain
-      # ---------------------------------------------
-      asm_disk_num:   8
-      asm_disk_size: 10
-      storage_pool_name: Vagrant_KVM_Storage
-      # ---------------------------------------------
-
-      env:
-      provider: libvirt
-      # ---------------------------------------------
-      gi_software: LINUX.X64_193000_grid_home.zip
-      # ---------------------------------------------
-      root_password:   welcome1
-      grid_password:   welcome1
-      oracle_password: welcome1
-      sys_password:    welcome1
-      # ---------------------------------------------
-      ora_languages:   en,en_GB
-      # ---------------------------------------------
-
-#### KVM/libVirt provider Example1 (Oracle FPP Server and FPP target on public network):
-
-    host1:
-      vm_name: fpps
-      mem_size: 16384
-      cpus: 1
-      private_ip:    192.168.200.101
-      public_ip:     192.168.125.101
-      vip_ip:        192.168.125.102
-      scan_ip1:      192.168.125.105
-      scan_ip2:      192.168.125.106
-      scan_ip3:      192.168.125.107
-      gns_ip:        192.168.125.108
-      ha_vip:        192.168.125.109
-      storage_pool_name: Vagrant_KVM_Storage
-
-      host2:
-      vm_name: fppc
-      mem_size: 8192
-      cpus: 1
-      public_ip:  192.168.125.201
-      storage_pool_name: Vagrant_KVM_Storage
-      deploy: 'true'
-
-      shared:
-      prefix_name:   vgt-ol7-fpp
-      # ---------------------------------------------
-      network:       hostonly
-      bridge_nic:    br0
-      netmask:       255.255.255.0
-      gateway:       10.0.0.1
-      dns_public_ip: 8.8.8.8
-      domain:        localdomain
-      # ---------------------------------------------
-      asm_disk_num:   8
-      asm_disk_size: 10
-      storage_pool_name: Vagrant_KVM_Storage
-      # ---------------------------------------------
-
-      env:
-      provider: libvirt
-      # ---------------------------------------------
-      gi_software: LINUX.X64_193000_grid_home.zip
-      # ---------------------------------------------
-      root_password:   welcome1
-      grid_password:   welcome1
-      oracle_password: welcome1
-      sys_password:    welcome1
-      # ---------------------------------------------
-      ora_languages:   en,en_GB
-      # ---------------------------------------------
 
 ## Note
 
@@ -371,27 +255,7 @@ env:
   You can specify a different time zone using a time zone name (e.g., "America/Los_Angeles") or an offset from GMT (e.g., "Etc/GMT-2"). For more information on specifying time zones, see [List of tz database time zones](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
 - Wallet Zip file location `/tmp/wallet_<pdb name>.zip`.
   Copy the file on client machine, unzip and set TNS_ADMIN to Wallet loc. Connect to DB using Oracle Sql Client or using your App
-- Using KVM/libVirt provider you may need add a firewall rule to permit NFS shared folder mounted on the guest
 
-    example: using 'uwf' : `sudo ufw allow to 192.168.121.1` where 192.168.121.1 is the IP for the `vagrant-libvirt` network (created by vagrant automatically)
-
-      virsh net-dumpxml vagrant-libvirt
-      <network connections='1' ipv6='yes'>
-        <name>vagrant-libvirt</name>
-        <uuid>d2579032-4e5e-4c3f-9d42-19b6c64ac609</uuid>
-        <forward mode='nat'>
-          <nat>
-            <port start='1024' end='65535'/>
-          </nat>
-        </forward>
-        <bridge name='virbr1' stp='on' delay='0'/>
-        <mac address='52:54:00:05:12:14'/>
-        <ip address='192.168.121.1' netmask='255.255.255.0'>
-          <dhcp>
-            <range start='192.168.121.1' end='192.168.121.254'/>
-          </dhcp>
-        </ip>
-      </network>
 - If you are behind a proxy, set the following env variables
   - (Linux/MacOSX)
     - export http_proxy=http://proxy:port
