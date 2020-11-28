@@ -14,7 +14,7 @@ one Grid Infrastructure and FPP Server host + (optional) an Oracle FPP target wi
 ](https://github.com/brokedba/OracleFPP)
 
 # Important #
-This has build have been adapted to allow for a 12 db to be shipped with the target (optionally) and was tested on VirtualBox but the change do not apply to kvm/Libvirt. 
+This build has been adapted to allow for a 12 db to be shipped with the target (optional) and was tested on VirtualBox but the change do not apply to kvm/Libvirt. 
 please only select virtualbox as hypervisor as otherwise the provisoning will fail. 
 - I will try to remove any kvm libvirt refences from this README as it's not applicable but it'll depend on my availability. 
 
