@@ -279,7 +279,9 @@ Note4 : following some fpp commands you may want to try
 - `rhpctl import image -image gi_19300 -imagetype ORACLEGISOFTWARE -zip /vagrant/ORCL_software/LINUX.X64_193000_grid_home.zip`
 - `rhpctl add workingcopy -workingcopy wc_db_19300 -image db_19300 -user oracle -groups OSBACKUP=dba,OSDG=dba,OSKM=dba,OSRAC=dba -oraclebase /u01/app/oracle -path /u01/app/oracle/product/193000/dbhome_1 -targetnode fppc -root`
 - `rhpctl add database -workingcopy wc_db_19300 -dbname ORCL -dbtype SINGLE -cdb -pdbName PDB -numberOfPDBs 2 -root`
-- `[grid@fpp-Server]$ rhpctl import image -image db_12102 -imagetype ORACLEDBSOFTWARE -path /u01/app/oracle/product/12.1.0.2/dbhome_1 -targetnode fpp-Client
+- 
+```
+[grid@fpp-Server]$ rhpctl import image -image db_12102 -imagetype ORACLEDBSOFTWARE -path /u01/app/oracle/product/12.1.0.2/dbhome_1 -targetnode fpp-Client
  -root
 Enter user "root" password:
 fpp-Server.evilcorp.com: Adding storage for image ...
@@ -287,4 +289,4 @@ fpp-Server.evilcorp.com: Creating a new ACFS file system for image "db_12102" ..
 fpp-Server.evilcorp.com: Starting export file system...
 fpp-Server.evilcorp.com: Mounting file system...
 fpp-Server.evilcorp.com: Copying files...
-fpp-Server.evilcorp.com: Removing export file system ...`
+fpp-Server.evilcorp.com: Removing export file system ...```
