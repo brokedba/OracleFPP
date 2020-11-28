@@ -8,7 +8,7 @@ one Grid Infrastructure and FPP Server host + (optional) an Oracle FPP target wi
 
 ##### What I changed #####
 - I added few shell scripts and modified the VagrantFile to add disks in the target FPP and deploy a 12c database while provisioning the host.
-- This will allow to import and image from an existing 12c database  as its not possible through zip files like for 18/19 home images. 
+- This will allow to import and image from an existing 12c database  as it's not possible through image zip files as for 18/19c home images. 
 
 # Important #
 This has build have been adapted to allow for a 12 db to be shipped with the target (optionally) and was tested on VirtualBox but the change do not apply to kvm/Libvirt. 
