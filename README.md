@@ -56,7 +56,7 @@ one Grid Infrastructure and FPP Server host + (optional) an Oracle FPP target, u
 ## Memory requirement
 
 - Deploy one Grid Infrastructure and FPP Server (host1) at least 12Gb are required
-- Deploy OL7 host2 (optional) as Oracle FPP target at least 6Gb are required
+- Deploy OL7 host2 (optional) as Oracle FPP target at least 6Gb are required (including the 12c database if chosen)
 
 ## Getting started
 
