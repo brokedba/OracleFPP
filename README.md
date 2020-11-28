@@ -9,6 +9,9 @@ one Grid Infrastructure and FPP Server host + (optional) an Oracle FPP target, u
 ##### What I changed #####
 - I added few shell scripts and modified the VagrantFile to add disks in the target FPP and deploy a 12c database while provisioning the host.
 - This will allow to import and image from an existing 12c database  as its not possible through zip files like for 18/19 home images. 
+
+
+
 ![](images/OracleFPP.png)
 
 
