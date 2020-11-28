@@ -4,7 +4,7 @@
 ###### Forked and updated by : @brokedba (<https://twitter.com/BrokeDba>) 
 
 This directory contains Vagrant build files to provision automatically
-one Grid Infrastructure and FPP Server host + (optional) an Oracle FPP target, using Vagrant, Oracle Linux 7.4 and shell scripts.
+one Grid Infrastructure and FPP Server host + (optional) an Oracle FPP target with an optional 12c DB home, using Vagrant, Oracle Linux 7.4 and shell scripts.
 
 ##### What I changed #####
 - I added few shell scripts and modified the VagrantFile to add disks in the target FPP and deploy a 12c database while provisioning the host.
