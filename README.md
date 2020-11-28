@@ -314,13 +314,14 @@ QUERY IMAGE
   Image platform: Linux_AMD64
   Interim patches installed:
   Contains a non-rolling patch: FALSE
-  Complete: TRUE```
+  Complete: TRUE
+```
 
 - upgrade from an existing 12 target db_home to a 19c working copy 
 
 ```
 
 [grid@fpp-Server ~]$ rhpctl upgrade database -dbname cdb1 -sourcehome /u01/app/oracle/product/12.1.0.2/dbhome_1  -destwc wc_db_19300 -targetnode fpp-Client -root
-     Enter user "root" password:
+         Enter user "root" password:
 
 ```
