@@ -1,6 +1,6 @@
 # Oracle Fleet Patching and Provisioning (FPP) Vagrant build on VirtualBox (brokedba EDIT)
 
-###### Author: Ruggero Citton (<ruggero.citton@oracle.com>) - Orale RAC Pack, Cloud Innovation and Solution Engineering Team
+###### Master build: Ruggero Citton (<ruggero.citton@oracle.com>) - Orale RAC Pack, Cloud Innovation and Solution Engineering Team
 ###### Forked and updated by : @brokedba (<https://twitter.com/BrokeDba>) 
 
 This directory contains Vagrant build files to provision automatically
