@@ -278,3 +278,10 @@ QUERY IMAGE
          Enter user "root" password:
 
 ```
+
+- upgrade from an existing 12 target db_home to a 19c working copy created durring the same operation (on the fly)
+
+```
+rhpctl upgrade database  -dbname cdb1 -sourcehome /u01/app/oracle/product/12.1.0.2/dbhome_1 -oraclebase /u01/app/oracle -image db_19300 -destwc wc_db_19300 -path /u01/app/oracle/product/19.0.0/dbhome_1  -targetnode fpp-Client -root
+
+```
