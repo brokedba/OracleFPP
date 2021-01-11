@@ -16,7 +16,7 @@ one Grid Infrastructure and FPP Server host + (optional) an Oracle FPP target wi
 # Important #
 This build has been adapted to allow for a 12 db to be shipped with the target (optional) and was tested on VirtualBox but the change do not apply to kvm/Libvirt. 
 please only select virtualbox as hypervisor as otherwise the provisoning will fail. 
-- I will try to remove any kvm libvirt refences from this README as it's not applicable but it'll depend on my availability. 
+- I will try to remove kvm libvirt refences from this README as the provider may not support my modification (I don't recommand trying it as the fork has never been tested on libvirt). 
 
 
 ![](images/OracleFPP.png)
@@ -279,7 +279,7 @@ QUERY IMAGE
 
 ```
 
-- upgrade from an existing 12 target db_home to a 19c working copy created durring the same operation (on the fly)
+- upgrade from an existing 12 target db_home to a 19c working copy created durring the same operation (on the fly) using -image -destwc options
 
 ```
 rhpctl upgrade database  -dbname cdb1 -sourcehome /u01/app/oracle/product/12.1.0.2/dbhome_1 -oraclebase /u01/app/oracle -image db_19300 -destwc wc_db_19300 -path /u01/app/oracle/product/19.0.0/dbhome_1  -targetnode fpp-Client -root
