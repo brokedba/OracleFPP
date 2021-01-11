@@ -1,9 +1,21 @@
 #!/bin/bash
-
 # Abort on any error
 set -e
 
+
 echo 'INSTALLER: Started up'
+echo "******************************************************************************"
+echo "Set up neofetch vagrant welcome page." `date`
+echo "******************************************************************************"
+curl -o /etc/yum.repos.d/konimex-neofetch-epel-7.repo https://copr.fedorainfracloud.org/coprs/konimex/neofetch/repo/epel-7/konimex-neofetch-epel-7.repo
+yum install neofetch -y
+
+mkdir /home/vagrant/.config/
+mkdir /home/vagrant/.config/neofetch
+cp /vagrant/config/neofetch_config.conf /home/vagrant/.config/neofetch/config.conf
+chown -R vagrant /home/vagrant/.config/
+sudo mv /etc/motd /etc/motd.old
+
 echo "******************************************************************************"
 echo "Set up environment for one-off actions." `date`
 echo "******************************************************************************"
