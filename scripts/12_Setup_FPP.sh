@@ -39,6 +39,11 @@ ${GI_HOME}/bin/srvctl remove rhpserver
 
 ${GI_HOME}/bin/srvctl add rhpserver -storage /rhp_storage -diskgroup DATA
 ${GI_HOME}/bin/srvctl start rhpserver
+echo
+echo '=== Enabling NFS SERVER ===' 
+echo 
+systemctl enable nfs-server
+systemctl start nfs-server
 #----------------------------------------------------------
 # EndOfFile
 #----------------------------------------------------------
