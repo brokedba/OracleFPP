@@ -2,6 +2,7 @@
 
 ###### Master build: Ruggero Citton (<ruggero.citton@oracle.com>) - Orale RAC Pack, Cloud Innovation and Solution Engineering Team
 ###### Forked and updated by : @brokedba (<https://twitter.com/BrokeDba>) 
+![](images/OracleFPP.png)
 
 This directory contains Vagrant build files to provision automatically
 one Grid Infrastructure and FPP Server host + (optional) an Oracle FPP target with an optional 12c DB home, using Vagrant, Oracle Linux 7.4 and shell scripts.
@@ -19,7 +20,7 @@ please only select virtualbox as hypervisor as otherwise the provisoning will fa
 - I will try to remove kvm libvirt refences from this README as the provider may not support my modification (I don't recommand trying it as the fork has never been tested on libvirt). 
 
 
-![](images/OracleFPP.png)
+
 
 
 ## Prerequisites
