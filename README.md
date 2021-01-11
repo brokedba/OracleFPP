@@ -29,14 +29,29 @@ please only select virtualbox as hypervisor as otherwise the provisoning will fa
 
 ## Free disk space requirement
 
-- Grid Infrastructure and Database binary zip under "./ORCL_software": ~9.3 Gb
-- Grid Infrastructure on u01 vdisk (node1, location set by `u01_disk`): ~7 Gb
-- OS guest vdisk (node1/node2) located on default VirtualBox VM location: ~2.5 Gb
-  - In case of KVM/libVirt provider, the disk is created under `storage pool = "storage_pool_name"`
-  - In case of VirtualBox
-    - Use `VBoxManage list systemproperties |grep folder` to find out the current VM default location
-    - Use `VBoxManage setproperty machinefolder <your path>` to set VM default location
-- Dynamically allocated storage for ASM shared virtual disks (node1, location set by `asm_disk_path`): ~24 Gb
+Build details
+Although all of the content is available on Github’s Read.me Page , I will try to share the relevant part in this article to add more context to the reader.  
+
+1. Disk space requirement
+Software zipped binaries for 19c Grid , 19c & 12c Database  under "./ORCL_software": ~8.3 Gb.
+FPP server : 2 OS  vdisks (should be 1 but original vagrantfile has 2) => actual size :  ~2 Gb (max 50)
+FPP server : Grid Infrastructure on fpps_u01 vdisk  =>  actual size : 12GB  (max 100)
+FPP server : 6x shared  asm vdisks  =>  actual size : ~40GB  (max 60)
+    Below storage needed if host 2 and 12c database are deployed  
+
+FPP target : 2 OS  vdisks (should be 1)  => actual size :  ~6 Gb (max 50)
+FPP target : fppc_u01 vdisk for working copies => actual size : ~13GB (max 100)
+FPP target : I added fppc_u02 vdisk  for existing 12 database oradata  => actual size : ~5GB (max 100)
+   Total space with an existing 12c database and 19c working copy in the FPP target, along with two images on the FPP server 
+    is  ~78GB
+
+2. Memory
+  The minimum required is 18GB (12 for the FPP server and 6 for the FPP target). Consider 12 only if the target is not deployed.
+
+3. The expecting Oracle software
+19c binaries 
+12c binaries (only required if you decide to deploy the target with a 12c database) 
+   fpp_software.png
 
 
 ## Memory requirement
