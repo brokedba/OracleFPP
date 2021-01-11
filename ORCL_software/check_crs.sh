@@ -14,7 +14,7 @@
 # Usage:  To display all resourcees     : $ ./crs 
 #         To track a certain resource  :  $  watch ' crs | egrep "db|INST" '   <-- here <<db>> tracks all database resources 
 #
-$GRID_HOME/bin/crsctl stat res -t  \
+$ORACLE_HOME/bin/crsctl stat res -t  \
   | awk -v t="$t" ' BEGIN { lres=0; cres= 0 } \
       $0 !~ "----" && $0 !~ "TARGET" && $0 !~ "Cluster Resources" && $0 !~ "Local Resources" && $0 !~ "State details" \
       { \
