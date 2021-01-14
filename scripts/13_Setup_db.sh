@@ -15,6 +15,7 @@ mkdir /home/vagrant/.config/neofetch
 cp /vagrant/config/neofetch_config.conf /home/vagrant/.config/neofetch/config.conf
 chown -R vagrant /home/vagrant/.config/
 sudo mv /etc/motd /etc/motd.old
+echo -e "\nneofetch" >> /home/vagrant/.bash_profile
 
 echo "******************************************************************************"
 echo "Set up environment for one-off actions." `date`
@@ -25,6 +26,8 @@ export SOFTWARE_DIR=/vagrant/ORCL_software
 export ORA_INVENTORY=/u01/app/oraInventory
 export SCRIPTS_DIR=/home/oracle/scripts
 export DATA_DIR=/u02/oradata
+# EM Express port
+export EM_EXPRESS_PORT=5500
 
 
 # get up to date
@@ -154,6 +157,7 @@ sed -i -e "s|###ORACLE_PDB###|${ORACLE_PDB}|g" /tmp/dbca.rsp
 sed -i -e "s|###ORACLE_CHARACTERSET###|${ORACLE_CHARACTERSET}|g" /tmp/dbca.rsp
 sed -i -e "s|###ORACLE_PWD###|${ORACLE_PASSWORD}|g" /tmp/dbca.rsp
 sed -i -e "s|###DATA_DIR###|${DATA_DIR}|g" /tmp/dbca.rsp
+
 # Create DB
 su -l oracle -c "dbca -silent -createDatabase -responseFile /tmp/dbca.rsp"
 
@@ -164,11 +168,12 @@ echo "**************************************************************************
 # 12.1.0.2 requires DBMS_XDB_CONFIG.SETHTTPSPORT for non-standard port to work
 su -l oracle -c "sqlplus / as sysdba <<EOF
    ALTER PLUGGABLE DATABASE $ORACLE_PDB SAVE STATE;
-   ALTER SYSTEM SET LOCAL_LISTENER = '(ADDRESS = (PROTOCOL = TCP)(HOST = 0.0.0.0)(PORT = $LISTENER_PORT))' SCOPE=BOTH;
-   ALTER SYSTEM REGISTER;
-   EXEC DBMS_XDB_CONFIG.SETHTTPSPORT ($EM_EXPRESS_PORT);
-   exit;
 EOF"
+#   ALTER SYSTEM SET LOCAL_LISTENER = '(ADDRESS = (PROTOCOL = TCP)(HOST = 0.0.0.0)(PORT = $LISTENER_PORT))' SCOPE=BOTH;
+#   ALTER SYSTEM REGISTER;
+#   EXEC DBMS_XDB_CONFIG.SETHTTPSPORT ($EM_EXPRESS_PORT);
+#   exit;
+#EOF"
 
 rm /tmp/dbca.rsp
 
